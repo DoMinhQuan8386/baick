@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Habit Tracker - Cài đặt mục tiêu</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🎯</div>
+        <span>StudyTracker</span>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Menu">&#9776;</button>
+
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html">🏠 Trang chủ</a></li>
+        <li class="nav-item"><a href="pomodoro.html">⏱️ Pomodoro</a></li>
+        <li class="nav-item"><a href="statistics.html">📊 Thống kê</a></li>
+        <li class="nav-item"><a href="settings.html">⚙️ Cài đặt</a></li>
+        <li>
+          <div class="nav-streak-pill pulse">
+            <span>🔥</span>
+            <span id="navStreakCount">0 ngày</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container" style="padding-top: 2rem; max-width: 780px;">
+
+    <div style="margin-bottom: 2rem;">
+      <h1 style="font-size: 1.85rem; font-weight: 800; margin-bottom: 0.35rem;">⚙️ Cấu hình mục tiêu & Nhắc nhở</h1>
+      <p style="color: var(--text-secondary);">Tùy chỉnh mục tiêu học tập hàng ngày và kích hoạt thông báo nhắc nhở trình duyệt.</p>
+    </div>
+
+    <!-- SETTINGS CARD -->
+    <div class="card">
+      <form id="settingsForm" class="settings-form">
+        
+        <!-- User Name -->
+        <div class="form-group">
+          <label class="form-label" for="settingUserName">Tên của bạn hoặc biệt danh</label>
+          <input type="text" id="settingUserName" class="form-input" placeholder="Ví dụ: Alex Nguyễn" required>
+          <span class="form-hint">Tên này sẽ hiển thị trong lời chào ở trang chủ.</span>
+        </div>
+
+        <!-- Daily Goal Minutes -->
+        <div class="form-group">
+          <label class="form-label" for="settingDailyGoal">Mục tiêu học mỗi ngày (Số phút)</label>
+          <input type="number" id="settingDailyGoal" class="form-input" min="10" max="720" step="10" required>
+          <span class="form-hint">Khuyến nghị: 120 phút (2 giờ) để duy trì sự tiến bộ đều đặn.</span>
+        </div>
+
+        <!-- Pomodoro Durations -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="settingStudyDuration">Thời gian học Pomodoro (Phút)</label>
+            <input type="number" id="settingStudyDuration" class="form-input" min="5" max="60" required>
+            <span class="form-hint">Tiêu chuẩn: 25 phút.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="settingBreakDuration">Thời gian nghỉ ngắn (Phút)</label>
+            <input type="number" id="settingBreakDuration" class="form-input" min="1" max="30" required>
+            <span class="form-hint">Tiêu chuẩn: 5 phút.</span>
+          </div>
+        </div>
+
+        <!-- Reminder Time -->
+        <div class="form-group">
+          <label class="form-label" for="settingReminderTime">Giờ nhắc nhở học tập hàng ngày</label>
+          <input type="time" id="settingReminderTime" class="form-input">
+          <span class="form-hint">Khung giờ bạn muốn nhận thông báo nhắc học.</span>
+        </div>
+
+        <!-- Browser Notification API Box -->
+        <div class="notification-toggle-box">
+          <div>
+            <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem;">🔔 Thông báo đẩy trình duyệt (Browser Notification)</div>
+            <div id="notifPermissionStatus" style="font-size: 0.82rem; color: var(--text-muted);">Đang kiểm tra quyền...</div>
+          </div>
+          <button type="button" class="btn btn-outline" id="btnEnableNotif" style="white-space: nowrap; font-size: 0.85rem; padding: 0.5rem 1rem;">
+            Yêu cầu cấp quyền
+          </button>
+        </div>
+
+        <!-- Actions -->
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+          <button type="submit" class="btn btn-primary">
+            💾 Lưu cấu hình
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- DANGER ZONE: RESET DATA -->
+    <div class="card" style="border-color: rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.03);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h3 style="color: #f87171; font-size: 1rem; margin-bottom: 0.2rem;">Khôi phục cài đặt gốc</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">Xóa dữ liệu hiện tại và khởi tạo lại chuỗi học tập cùng dữ liệu mẫu ban đầu.</p>
+        </div>
+        <button type="button" class="btn btn-danger" id="btnResetData">
+          🗑️ Đặt lại toàn bộ
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Study Habit Tracker. Thiết kế tập trung & phát triển với HTML5, CSS3 và Vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

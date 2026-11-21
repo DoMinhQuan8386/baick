@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Habit Tracker - Trang chủ</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🎯</div>
+        <span>StudyTracker</span>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Menu">&#9776;</button>
+
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html">🏠 Trang chủ</a></li>
+        <li class="nav-item"><a href="pomodoro.html">⏱️ Pomodoro</a></li>
+        <li class="nav-item"><a href="statistics.html">📊 Thống kê</a></li>
+        <li class="nav-item"><a href="settings.html">⚙️ Cài đặt</a></li>
+        <li>
+          <div class="nav-streak-pill pulse">
+            <span>🔥</span>
+            <span id="navStreakCount">0 ngày</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    
+    <!-- HERO GREETING BANNER -->
+    <section class="hero-greeting">
+      <div class="greeting-card">
+        <div class="greeting-text">
+          <h1 id="userGreeting">Xin chào, <span>Học viên!</span> 👋</h1>
+          <p>Biến sự kiên trì mỗi ngày thành chìa khóa mở cánh cửa thành công.</p>
+        </div>
+        <div class="hero-actions">
+          <a href="pomodoro.html" class="btn btn-primary">
+            <span>⚡</span> Bắt đầu học ngay
+          </a>
+          <a href="statistics.html" class="btn btn-outline">
+            <span>📈</span> Xem thống kê
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY STATS CARDS -->
+    <section class="stats-grid">
+      <!-- Streak Widget -->
+      <div class="stat-card">
+        <div class="stat-icon streak">🔥</div>
+        <div class="stat-info">
+          <h3>Chuỗi học tập</h3>
+          <div class="stat-value" id="homeStreakValue">0 ngày</div>
+          <div class="stat-sub">Duy trì học mỗi ngày</div>
+        </div>
+      </div>
+
+      <!-- Minutes Studied Today -->
+      <div class="stat-card">
+        <div class="stat-icon time">⏱️</div>
+        <div class="stat-info">
+          <h3>Đã học hôm nay</h3>
+          <div class="stat-value" id="homeTodayMinutes">0 phút</div>
+          <div class="stat-sub">Thời gian ghi nhận thực tế</div>
+        </div>
+      </div>
+
+      <!-- Daily Goal -->
+      <div class="stat-card">
+        <div class="stat-icon goal">🎯</div>
+        <div class="stat-info">
+          <h3>Mục tiêu trong ngày</h3>
+          <div class="stat-value" id="homeDailyGoal">120 phút</div>
+          <div class="stat-sub">Mục tiêu cá nhân hóa</div>
+        </div>
+      </div>
+
+      <!-- Badges Unlocked -->
+      <div class="stat-card">
+        <div class="stat-icon badges">🏆</div>
+        <div class="stat-info">
+          <h3>Huy hiệu đã đạt</h3>
+          <div class="stat-value" id="homeBadgeCount">0 / 6</div>
+          <div class="stat-sub">Thành tích học tập</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRESS BAR CARD -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <span>🚀</span> Tiến độ mục tiêu hôm nay
+        </h2>
+        <a href="settings.html" style="color: var(--primary-light); text-decoration: none; font-size: 0.9rem; font-weight: 600;">
+          Chỉnh sửa mục tiêu &rarr;
+        </a>
+      </div>
+
+      <div class="progress-wrapper">
+        <div class="progress-label-row">
+          <span style="color: var(--text-secondary); font-weight: 500;">Tỷ lệ hoàn thành:</span>
+          <span id="homeProgressPercent" style="font-weight: 700; color: #fff;">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="homeProgressFill"></div>
+        </div>
+      </div>
+
+      <p id="homeProgressDetails" style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 1rem;">
+        Đang tải dữ liệu tiến độ...
+      </p>
+
+      <!-- Quick Log Buttons -->
+      <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+        <span style="font-size: 0.88rem; color: var(--text-muted);">Ghi nhận nhanh buổi học ngoài Pomodoro:</span>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn btn-outline btn-quick-log" data-mins="15" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">+15 phút</button>
+          <button class="btn btn-outline btn-quick-log" data-mins="30" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">+30 phút</button>
+          <button class="btn btn-outline btn-quick-log" data-mins="45" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">+45 phút</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMIFICATION: BADGES SHOWCASE -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <span>🎖️</span> Hệ thống huy hiệu thành tích
+        </h2>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Mở khóa khi đạt cột mốc mới</span>
+      </div>
+
+      <div class="badge-grid" id="homeBadgesContainer">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Study Habit Tracker. Thiết kế tập trung & phát triển với HTML5, CSS3 và Vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

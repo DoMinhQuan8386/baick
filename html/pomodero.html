@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Habit Tracker - Đồng hồ Pomodoro</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🎯</div>
+        <span>StudyTracker</span>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Menu">&#9776;</button>
+
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html">🏠 Trang chủ</a></li>
+        <li class="nav-item"><a href="pomodoro.html">⏱️ Pomodoro</a></li>
+        <li class="nav-item"><a href="statistics.html">📊 Thống kê</a></li>
+        <li class="nav-item"><a href="settings.html">⚙️ Cài đặt</a></li>
+        <li>
+          <div class="nav-streak-pill pulse">
+            <span>🔥</span>
+            <span id="navStreakCount">0 ngày</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <div class="pomodoro-container">
+      
+      <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">⏱️ Phòng học Pomodoro</h1>
+        <p style="color: var(--text-secondary);">Phương pháp quả cà chua giúp duy trì 100% sự tập trung mà không mệt mỏi.</p>
+      </div>
+
+      <div class="pomodoro-card">
+        
+        <!-- Mode Selectors -->
+        <div class="mode-selectors">
+          <button class="mode-btn active" data-mode="study">📚 Học tập</button>
+          <button class="mode-btn" data-mode="shortBreak">☕ Nghỉ ngắn (5p)</button>
+          <button class="mode-btn" data-mode="longBreak">🧘 Nghỉ dài (15p)</button>
+        </div>
+
+        <!-- Circular Countdown Timer -->
+        <div class="timer-circle-wrap">
+          <svg class="timer-svg" viewBox="0 0 300 300">
+            <!-- Background track -->
+            <circle class="timer-circle-bg" cx="150" cy="150" r="130"></circle>
+            <!-- Animated progress ring -->
+            <circle class="timer-circle-progress" id="pomoCircleProgress" cx="150" cy="150" r="130"></circle>
+          </svg>
+
+          <!-- Inside Digits & Mode Tag -->
+          <div class="timer-display">
+            <div class="timer-digits" id="pomoDigits">25:00</div>
+            <div class="timer-mode-tag" id="pomoModeTag">HỌC TẬP TẬP TRUNG</div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="timer-controls">
+          <button class="btn btn-outline btn-timer-secondary" id="pomoResetBtn" title="Đặt lại đồng hồ">
+            🔄
+          </button>
+          
+          <button class="btn btn-primary btn-timer-primary" id="pomoStartBtn">
+            Bắt đầu
+          </button>
+
+          <button class="btn btn-outline btn-timer-secondary" id="pomoFinishEarlyBtn" title="Kết thúc sớm & ghi nhận phút đã học">
+            💾
+          </button>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted);">
+          💡 Mẹo: Khi kết thúc phiên, hệ thống sẽ tự động phát chuông, lưu phút học vào thống kê và kiểm tra huy hiệu!
+        </p>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Study Habit Tracker. Thiết kế tập trung & phát triển với HTML5, CSS3 và Vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

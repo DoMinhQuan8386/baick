@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Habit Tracker - Thống kê học tập</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">🎯</div>
+        <span>StudyTracker</span>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Menu">&#9776;</button>
+
+      <ul class="nav-links">
+        <li class="nav-item"><a href="index.html">🏠 Trang chủ</a></li>
+        <li class="nav-item"><a href="pomodoro.html">⏱️ Pomodoro</a></li>
+        <li class="nav-item"><a href="statistics.html">📊 Thống kê</a></li>
+        <li class="nav-item"><a href="settings.html">⚙️ Cài đặt</a></li>
+        <li>
+          <div class="nav-streak-pill pulse">
+            <span>🔥</span>
+            <span id="navStreakCount">0 ngày</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container" style="padding-top: 2rem;">
+
+    <div style="margin-bottom: 2rem;">
+      <h1 style="font-size: 1.85rem; font-weight: 800; margin-bottom: 0.35rem;">📊 Báo cáo & Thống kê học tập</h1>
+      <p style="color: var(--text-secondary);">Theo dõi chi tiết hiệu suất, thói quen và sự tiến bộ theo thời gian thực.</p>
+    </div>
+
+    <!-- OVERVIEW METRICS GRID -->
+    <section class="stats-grid">
+      <!-- Total Time -->
+      <div class="stat-card">
+        <div class="stat-icon time">⏳</div>
+        <div class="stat-info">
+          <h3>Tổng thời gian học</h3>
+          <div class="stat-value" id="statTotalHours">0 giờ</div>
+          <div class="stat-sub">Tích lũy từ trước đến nay</div>
+        </div>
+      </div>
+
+      <!-- Active Days -->
+      <div class="stat-card">
+        <div class="stat-icon goal">📅</div>
+        <div class="stat-info">
+          <h3>Số ngày đã học</h3>
+          <div class="stat-value" id="statTotalDays">0 ngày</div>
+          <div class="stat-sub">Các ngày có ghi nhận học</div>
+        </div>
+      </div>
+
+      <!-- Average Time / Day -->
+      <div class="stat-card">
+        <div class="stat-icon streak">📈</div>
+        <div class="stat-info">
+          <h3>Thời gian TB / Ngày</h3>
+          <div class="stat-value" id="statAvgMinutes">0 phút</div>
+          <div class="stat-sub">Trung bình mỗi ngày học</div>
+        </div>
+      </div>
+
+      <!-- Longest Streak -->
+      <div class="stat-card">
+        <div class="stat-icon badges">🔥</div>
+        <div class="stat-info">
+          <h3>Chuỗi kỷ lục</h3>
+          <div class="stat-value" id="statLongestStreak">0 ngày</div>
+          <div class="stat-sub">Kỷ lục liên tiếp cao nhất</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7-DAY RECENT STUDY CHART -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <span>📊</span> Biểu đồ thời gian học 7 ngày gần nhất
+        </h2>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Tự động tính theo thời gian học thực tế</span>
+      </div>
+
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        Cột màu xanh lá biểu thị ngày đã hoàn thành hoặc vượt mục tiêu hàng ngày.
+      </p>
+
+      <!-- SVG Chart Wrapper -->
+      <div class="chart-container">
+        <svg id="weeklyChartSvg" class="bar-chart-svg" viewBox="0 0 700 220" preserveAspectRatio="none">
+          <!-- Rendered dynamically by JavaScript -->
+        </svg>
+      </div>
+    </section>
+
+    <!-- CALENDAR HEATMAP (GITHUB CONTRIBUTIONS STYLE) -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <span>🟩</span> Bản đồ nhiệt học tập (Activity Heatmap)
+        </h2>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Hiển thị 16 tuần gần nhất</span>
+      </div>
+
+      <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+        Mỗi ô vuông đại diện cho 1 ngày hoạt động. Rê chuột vào ô để xem ngày và số phút học chi tiết.
+      </p>
+
+      <div class="heatmap-container">
+        <div class="heatmap-grid" id="heatmapGrid">
+          <!-- Rendered dynamically by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="heatmap-legend">
+        <span>Ít</span>
+        <div class="legend-boxes">
+          <div class="legend-box" style="background-color: var(--heat-0);" title="0 phút"></div>
+          <div class="legend-box" style="background-color: var(--heat-1);" title="1 - 25 phút"></div>
+          <div class="legend-box" style="background-color: var(--heat-2);" title="26 - 60 phút"></div>
+          <div class="legend-box" style="background-color: var(--heat-3);" title="61 - 120 phút"></div>
+          <div class="legend-box" style="background-color: var(--heat-4);" title="> 120 phút"></div>
+        </div>
+        <span>Nhiều</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Study Habit Tracker. Thiết kế tập trung & phát triển với HTML5, CSS3 và Vanilla JavaScript.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
